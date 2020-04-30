@@ -1,0 +1,2 @@
+sudo javac -d bin_RPi/ -cp "libs/*:.jar" src_RPi/*.java src_RPi/Errors/*.java
+sudo java -cp "lib/*:.jar:bin_RPi" Run

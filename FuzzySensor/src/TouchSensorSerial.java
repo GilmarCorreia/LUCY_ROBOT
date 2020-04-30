@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Gilmar Correia
+ * 
+ */
 
 public class TouchSensorSerial extends SerialArduino{
 	//Serial Protocol

@@ -14,7 +14,7 @@ import java.util.*;
  * Fontes de Referência: https://playground.arduino.cc/Interfacing/Java/
  */
 
-public class SerialArduino implements SerialPortEventListener   {
+public class SerialArduino implements SerialPortEventListener{
 
 	private Scanner keyboard = new Scanner(System.in);
 	private ArrayList <CommPortIdentifier> portMap = new ArrayList<CommPortIdentifier>();
