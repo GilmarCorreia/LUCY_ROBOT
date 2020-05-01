@@ -1,7 +1,8 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
+import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.TilePane;
@@ -9,7 +10,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class AnimationProgressBar{
+public class AnimationProgressBar extends Application{
     
     public static void run(Stage primaryStage, FuzzyProperties fuzzyCl, TouchSensorSerial ts){  
         // set title for the stage 
@@ -87,6 +88,13 @@ public class AnimationProgressBar{
   
         primaryStage.show(); 
     } 
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+      TouchSensorSerial TS8 = new TouchSensorSerial();
+      FuzzyProperties fuzzyCl = new FuzzyProperties();
+      run(primaryStage,fuzzyCl,TS8);
+    }
 }
 
 /*

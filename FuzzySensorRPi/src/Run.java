@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * 
@@ -7,18 +6,8 @@ import javafx.stage.Stage;
  *
  */
 
-public class Run extends Application{
-	
-	TouchSensorSerial TS8 = new TouchSensorSerial();
-    
+public class Run {
 	public static void main(String[] args) {
-		launch(args);
+		Application.launch(AnimationProgressBar.class,args);
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		FuzzyProperties fuzzyCl = new FuzzyProperties();
-		AnimationProgressBar.run(primaryStage,fuzzyCl,TS8);
-	}
-
 }
