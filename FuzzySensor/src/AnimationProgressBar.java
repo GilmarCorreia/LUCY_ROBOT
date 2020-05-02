@@ -26,10 +26,10 @@ public class AnimationProgressBar{
         texts[2].setText("Nojo");
         texts[3].setText("Tristeza");
         texts[4].setText("Amor");
-        texts[5].setText("Gratidão");
+        texts[5].setText("Gratidao");
         texts[6].setText("Alegria");
         texts[7].setText("Simpatia");
-        texts[8].setText("Força =       Tempo = ");
+        texts[8].setText("Forca =       Tempo = ");
         texts[9].setText("Hertenstein");
         texts[10].setText("Andreasson");
         texts[11].setText("Mix");
@@ -66,7 +66,7 @@ public class AnimationProgressBar{
             				pb[j+(8*i)].setProgress(Math.abs(values3[j])/50.0);
             		}
             	}
-            	texts[8].setText("Força = " + Math.round((force/1023.0)*100.0)+"%    Tempo = " + Math.round(deltaT) + "ms");
+            	texts[8].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%    Tempo = " + Math.round(deltaT) + "ms");
               
             }
         }));
@@ -108,7 +108,7 @@ public class AnimationProgressBar{
             				pb[j+(8*i)].setProgress(Math.abs(values3[j])/50.0);
             		}
             	}
-            	texts[8].setText("Força = " + Math.round((forca/1024.0)*100.0)+"%    Tempo = " + tempo/1000 + "s");
+            	texts[8].setText("Forca = " + Math.round((forca/1024.0)*100.0)+"%    Tempo = " + tempo/1000 + "s");
                 forca++;
                 
                 if(forca >=1024) {

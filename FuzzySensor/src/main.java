@@ -29,7 +29,7 @@ import javafx.util.Duration;
  *
  */
 
-public class main extends Application{
+public class Main extends Application{
 	
 	TouchSensorSerial TS8 = new TouchSensorSerial();
     

@@ -133,7 +133,7 @@ public class TouchSensorSerial extends SerialArduino{
 			}
 		}
 		else
-			throw new Exception("Erro de Comunicação");
+			throw new Exception("Erro de Comunicacao");
 		
 		clearBuffer();
 	}

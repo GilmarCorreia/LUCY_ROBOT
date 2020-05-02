@@ -8,6 +8,6 @@ package Errors;
 
 public class NoAvailablePorts extends Error{
 	public NoAvailablePorts() {
-		super ("Não Existem Portas Disponíveis");
+		super ("Nao Existem Portas Disponiveis");
 	}
 }

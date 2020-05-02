@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * 
  * @author Gilmar Correia
- * Fontes de Referência: https://playground.arduino.cc/Interfacing/Java/
+ * Fontes de Referencia: https://playground.arduino.cc/Interfacing/Java/
  */
 
 public class SerialArduino implements SerialPortEventListener{
@@ -46,7 +46,7 @@ public class SerialArduino implements SerialPortEventListener{
 	}
 	
 	private void showTexts(){
-		System.out.println("## Habilitando Comunicação Serial com o Microcontrolador ##");
+		System.out.println("## Habilitando Comunicacao Serial com o Microcontrolador ##");
 		
 		try {
 			seeAvailablePorts();
@@ -55,7 +55,7 @@ public class SerialArduino implements SerialPortEventListener{
 		}
 		
 		System.out.println("");
-		System.out.println("Qual Porta Deseja Habilitar (Somente Números)?");
+		System.out.println("Qual Porta Deseja Habilitar (Somente Numeros)?");
 		
 		short portNumber = this.keyboard.nextShort();
 		setPortName(this.portMap.get(portNumber-1).getName());
@@ -105,7 +105,7 @@ public class SerialArduino implements SerialPortEventListener{
 		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
 		
 		while (pList.hasMoreElements()) {
-			System.out.println("\nPORTAS DISPONÍVEIS");
+			System.out.println("\nPORTAS DISPONIVEIS");
 			
 			CommPortIdentifier commPort = (CommPortIdentifier) pList.nextElement();
 			this.portMap.add(commPort);
