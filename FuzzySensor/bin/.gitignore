@@ -1,9 +1,7 @@
+/Main.class
 /Errors/
-/AnimationProgressBar$1.class
-/AnimationProgressBar.class
-/FuzzyProperties.class
-/SerialArduino.class
-/SimpleGraph$GraphCanvas.class
-/SimpleGraph.class
-/TouchSensorSerial.class
 /main.class
+/SwingProgressBar.class
+/SwingProgressBar$1.class
+/SwingProgressBar$2.class
+/mainFX.class
