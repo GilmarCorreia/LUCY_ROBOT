@@ -1,5 +1,12 @@
-javac -d bin/ -cp "libs/*:.jar" src/*.java src/Errors/*.java
-java -cp "lib/*:.jar:bin" main
+Para rodar o código é necessários jogar os arquivos .jar no jre do java utilizado:
 
-javac -d bin/ -cp "libs/*;.jar" src/*.java src/Errors/*.java
-java -cp "lib/*;.jar;bin" main
+Exemplo:
+	Em /usr/lib/jvm/java-8-openjdk-armhf/jre/lib/ext
+		-> Colocar a biblioteca jfxrt.jar, RXTXComm.jar, JFuzzyLogic.jar e AX12-JavA.jar
+
+	Em /usr/lib/jvm/java-8-openjdk-armhf/jre/bin
+		-> Colocar o librxtxserial_2_1_7.so
+
+Para compilar, entrar na pasta LUCY_ROBOT:
+	- javac -d bin/ src/*.java src/Errors/*.java
+	- java -cp bin main

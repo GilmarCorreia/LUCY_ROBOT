@@ -24,7 +24,7 @@ public class SerialArduino implements SerialPortEventListener{
 	
 	// DEFAULT VALUES
 	private int timeout = 1000;
-	private int baudrate = 9600;
+	private int baudrate = 115200;
 	private String portName;
 	private String inputValue;
 	private long time = 0, initialTime = 0;
@@ -150,6 +150,7 @@ public class SerialArduino implements SerialPortEventListener{
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {	
 				setInputValue(input.readLine());
+				System.out.println("ENTREI");
 				run();
 			} catch (IOException e) {} catch (Exception e) {
 				// TODO Auto-generated catch block

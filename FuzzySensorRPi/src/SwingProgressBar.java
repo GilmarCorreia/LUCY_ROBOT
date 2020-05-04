@@ -89,7 +89,7 @@ public class SwingProgressBar extends JFrame{
 	            	texts[8].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%");
 	            	texts[9].setText("Tempo = " + Math.round(deltaT) + "ms");
 	            	
-	            	System.out.println("Entrei");
+	            	//System.out.println("Entrei");
 				}
 			});
 			
