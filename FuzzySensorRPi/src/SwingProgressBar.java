@@ -59,7 +59,7 @@ public class SwingProgressBar extends JFrame{
 			
 			JPanel window = add(texts,pb);
 			
-			clock = new Timer(10, new ActionListener() {
+			clock = new Timer(1, new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int force = ts.getForce();
 	            	double initialTime = ts.getMillisInitialTime();

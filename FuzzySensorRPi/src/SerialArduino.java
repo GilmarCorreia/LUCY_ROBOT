@@ -24,7 +24,7 @@ public class SerialArduino implements SerialPortEventListener{
 	
 	// DEFAULT VALUES
 	private int timeout = 1000;
-	private int baudrate = 115200;
+	private int baudrate = 9600;
 	private String portName;
 	private String inputValue;
 	private long time = 0, initialTime = 0;
@@ -59,13 +59,14 @@ public class SerialArduino implements SerialPortEventListener{
 		
 		short portNumber = this.keyboard.nextShort();
 		setPortName(this.portMap.get(portNumber-1).getName());
+		//setPortName(null);
 		
 		System.out.println("\nPorta Habilitada: " + getPortName());
 	}
 	
 	private void setPortName (String portName) {
 		if (portName == null)
-			this.portName = "/com/";
+			this.portName = "/dev/ttyACM0";
 		else
 			this.portName = portName; 
 	}
@@ -104,9 +105,8 @@ public class SerialArduino implements SerialPortEventListener{
 		
 		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
 		
-		while (pList.hasMoreElements()) {
-			System.out.println("\nPORTAS DISPONIVEIS");
-			
+		System.out.println("\nPORTAS DISPONIVEIS");
+		while (pList.hasMoreElements()) {	
 			CommPortIdentifier commPort = (CommPortIdentifier) pList.nextElement();
 			this.portMap.add(commPort);
 			
@@ -150,8 +150,8 @@ public class SerialArduino implements SerialPortEventListener{
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {	
 				setInputValue(input.readLine());
-				System.out.println("ENTREI");
 				run();
+				//System.out.println(input.readLine());
 			} catch (IOException e) {} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
