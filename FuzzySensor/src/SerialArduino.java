@@ -151,6 +151,7 @@ public class SerialArduino implements SerialPortEventListener{
 			try {	
 				setInputValue(input.readLine());
 				run();
+				System.out.println(input.readLine());
 			} catch (IOException e) {} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
