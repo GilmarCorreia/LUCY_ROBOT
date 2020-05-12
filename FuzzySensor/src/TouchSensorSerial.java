@@ -109,7 +109,7 @@ public class TouchSensorSerial extends SerialArduino{
 			                setForce(force);
 			                //System.out.println(getForce());
 			              }
-			              else
+			              else 
 			            	throw new Exception("Falha na Mensagem");
 			          
 			        	  break;
@@ -125,14 +125,16 @@ public class TouchSensorSerial extends SerialArduino{
 			            	  }
 			            	  setForce(0);
 			              }
-			              else
+			              else {
+			            	setForce(0);
 			            	throw new Exception("Falha na Mensagem");
+			              }
 			        	  break;
 			        }
 				}
 			}
 		}
-		else
+		else 
 			throw new Exception("Erro de Comunicacao");
 		
 		clearBuffer();

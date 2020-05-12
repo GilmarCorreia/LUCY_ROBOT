@@ -66,6 +66,8 @@ public class SwingProgressBar extends JFrame{
 	            	double currentTime = System.currentTimeMillis();
 	            	double deltaT = currentTime-initialTime;
 	            	
+	            	//System.out.println(force);
+	            	
 	            	double values[] = fuzzyCl.fuzzyClassifier(fuzzyCl.fis,force,deltaT/1000.0);
 	            	double values2[] = fuzzyCl.fuzzyClassifier(fuzzyCl.fis2,force,deltaT/1000.0);
 	            	double values3[] = fuzzyCl.fuzzyClassifier(fuzzyCl.fis3,force,deltaT/1000.0);
@@ -88,8 +90,6 @@ public class SwingProgressBar extends JFrame{
 	            	}
 	            	texts[8].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%");
 	            	texts[9].setText("Tempo = " + Math.round(deltaT) + "ms");
-	            	
-	            	System.out.println("Entrei");
 				}
 			});
 			
