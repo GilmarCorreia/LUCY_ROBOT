@@ -8,8 +8,8 @@ Exemplo:
 		-> Colocar o librxtxserial_2_1_7.so
 
 Para compilar, entrar na pasta LUCY_ROBOT:
-	- javac -d bin/ -cp "libs/*:.jar" src/*.java src/Errors/*.java
-	- java -cp "bin:libs/*:.jar" main
+	- javac -d bin/ -cp "libs/*:.jar:libs/pi4j/*:.jar" src/*.java src/Errors/*.java
+	- java -cp "bin:libs/*:.jar:libs/pi4j/*:.jar" main
 
 Criar um símbolo para /dev/ttyACM0
 	- sudo ln -s /dev/ttyACM0 /dev/ttyS2
