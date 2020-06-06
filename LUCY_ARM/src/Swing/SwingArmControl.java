@@ -1,13 +1,6 @@
 package Swing;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,12 +13,11 @@ import Bioloid.Bioloid;
 
 public class SwingArmControl extends JFrame{
 
-	private int angles[] = new int[3];
-	private boolean done = false;
+	private int dec[] = new int[3];
 	private int increment = 0;
 	
 	public SwingArmControl(Bioloid Lucy) throws InterruptedException, Exception {
-		super("Touch Sensor Window");
+		super("Arm Window");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(new Dimension(600,300));
 		setLocationRelativeTo(null);
@@ -39,17 +31,17 @@ public class SwingArmControl extends JFrame{
 		Lucy.move(4,818);
 		Lucy.move(6,512);
 		
-		angles[0] = 204;
-		angles[1] = 818;
-		angles[2] = 512;
+		dec[0] = 204;
+		dec[1] = 818;
+		dec[2] = 512;
 		
 		JProgressBar M[] = new JProgressBar[3];
 		
 		for(int index = 0; index<M.length;index++) {
 			M[index] = new JProgressBar();
-			M[index].setValue(100*(angles[index]/1023));
+			M[index].setValue(100*(dec[index]/1023));
 			M[index].setStringPainted(true);
-			M[index].setString("M"+index+" : "+ angles[index]);
+			M[index].setString("M"+index+" : "+ dec[index]);
 			M[index].setSize(new Dimension(100,50));
 		}
 		
@@ -69,7 +61,7 @@ public class SwingArmControl extends JFrame{
 		JLabel T[] = new JLabel[2];
 		for(int i=0;i<T.length;i++) {
     		T[i] = new JLabel();
-    		T[i].setFont(new Font ("Arial", Font.BOLD,20));
+    		T[i].setFont(new Font ("Arial", Font.BOLD,18));
     	}
 		
 		T[0].setText("Defining pHome for Lucy Arm");
@@ -92,6 +84,9 @@ public class SwingArmControl extends JFrame{
 		
 		gbc.gridwidth = 5;
 		window.add(T[0],gbc);
+		gbc.gridy++;
+		
+		gbc.gridwidth = 2;
 		gbc.gridx+=3;
 		window.add(T[1],gbc);
 		gbc.gridy++;
@@ -128,6 +123,12 @@ public class SwingArmControl extends JFrame{
 				
 		gbc.gridx = 0;
 		gbc.gridy++;
+		gbc.gridwidth = 5;
+		window.add(Box.createHorizontalStrut(10),gbc);
+		
+		gbc.gridwidth = 1;
+		gbc.gridy++;
+		gbc.gridx+=4;
 		window.add(B[6],gbc);		
 		add(window);
 		
@@ -137,10 +138,10 @@ public class SwingArmControl extends JFrame{
 		B[0].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[0] = angles[0] + increment;
-					Lucy.move(2,angles[0]);
-					M[0].setValue(100*(angles[0]/1023));
-					M[0].setString("M0 : "+ angles[0]);
+	            	dec[0] = dec[0] + increment;
+					Lucy.move(2,dec[0]);
+					M[0].setValue(100*(dec[0]/1023));
+					M[0].setString("M0 : "+ dec[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -151,10 +152,10 @@ public class SwingArmControl extends JFrame{
 		B[1].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[0] = angles[0] - increment;
-					Lucy.move(2,angles[0]);
-					M[0].setValue(100*(angles[0]/1023));
-					M[0].setString("M0 : "+ angles[0]);
+	            	dec[0] = dec[0] - increment;
+					Lucy.move(2,dec[0]);
+					M[0].setValue(100*(dec[0]/1023));
+					M[0].setString("M0 : "+ dec[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -165,10 +166,10 @@ public class SwingArmControl extends JFrame{
 		B[2].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[1] = angles[1] + increment;
-					Lucy.move(4,angles[1]);
-					M[1].setValue(100*(angles[1]/1023));
-					M[1].setString("M1 : "+ angles[1]);
+	            	dec[1] = dec[1] + increment;
+					Lucy.move(4,dec[1]);
+					M[1].setValue(100*(dec[1]/1023));
+					M[1].setString("M1 : "+ dec[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -179,10 +180,10 @@ public class SwingArmControl extends JFrame{
 		B[3].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[1] = angles[1] - increment;
-					Lucy.move(4,angles[1]);
-					M[1].setValue(100*(angles[1]/1023));
-					M[1].setString("M1 : "+ angles[1]);
+	            	dec[1] = dec[1] - increment;
+					Lucy.move(4,dec[1]);
+					M[1].setValue(100*(dec[1]/1023));
+					M[1].setString("M1 : "+ dec[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -193,10 +194,10 @@ public class SwingArmControl extends JFrame{
 		B[4].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[2] = angles[2] + increment;
-					Lucy.move(6,angles[2]);
-					M[2].setValue(100*(angles[2]/1023));
-					M[2].setString("M2 : "+ angles[2]);
+	            	dec[2] = dec[2] + increment;
+					Lucy.move(6,dec[2]);
+					M[2].setValue(100*(dec[2]/1023));
+					M[2].setString("M2 : "+ dec[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -207,10 +208,10 @@ public class SwingArmControl extends JFrame{
 		B[5].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-	            	angles[2] = angles[2] - increment;
-					Lucy.move(6,angles[2]);
-					M[2].setValue(100*(angles[2]/1023));
-					M[2].setString("M2 : "+ angles[2]);
+	            	dec[2] = dec[2] - increment;
+					Lucy.move(6,dec[2]);
+					M[2].setValue(100*(dec[2]/1023));
+					M[2].setString("M2 : "+ dec[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -220,8 +221,6 @@ public class SwingArmControl extends JFrame{
 	    
 		B[6].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	            done = true;
-	            System.out.println(done);
 	            dispose();
 	         }          
 	    });
@@ -254,11 +253,7 @@ public class SwingArmControl extends JFrame{
 	    });
 	}
 	
-	public int[] getAngles() {
-		return angles;
-	}
-	
-	public boolean getDone(){
-		return this.done;
+	public int[] getDec() {
+		return dec;
 	}
 }
