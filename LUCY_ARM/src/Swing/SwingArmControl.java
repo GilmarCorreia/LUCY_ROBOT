@@ -75,13 +75,13 @@ public class SwingArmControl extends JFrame{
 		T[0].setText("Defining pHome for Lucy Arm");
 		T[1].setText("Increment:");
 		
-		JFrame window = add(M,B,T);
+		add(M,B,T);
 		
-		actionListeners(Lucy,B, window);		
+		actionListeners(Lucy,B);		
 	}
 	
-	private JFrame add(JProgressBar M[], JButton B[], JLabel T[]) {
-		JFrame window = new JFrame();
+	private void add(JProgressBar M[], JButton B[], JLabel T[]) {
+		JPanel window = new JPanel();
 
 		window.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -129,7 +129,6 @@ public class SwingArmControl extends JFrame{
 		window.add(B[6],gbc);		
 		add(window);
 		
-		return window;
 	}
 	
 	private void actionListeners(Bioloid Lucy, JButton[] B, JFrame window) {
@@ -208,7 +207,7 @@ public class SwingArmControl extends JFrame{
 		B[6].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            done = true;
-	            window.dispose();
+	            this.dispose();
 	         }          
 	    });
 		
