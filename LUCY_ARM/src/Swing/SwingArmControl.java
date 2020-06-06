@@ -132,7 +132,7 @@ public class SwingArmControl extends JFrame{
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 5;
-		window.add(Box.createHorizontalStrut(10),gbc);
+		window.add(Box.createVerticalStrut(50),gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridy++;
