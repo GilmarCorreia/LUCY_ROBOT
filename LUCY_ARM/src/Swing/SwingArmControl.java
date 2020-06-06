@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,7 @@ public class SwingArmControl extends JFrame{
 
 	private int angles[] = new int[3];
 	public boolean done = false;
+	public int increment = 0;
 	
 	public SwingArmControl(Bioloid Lucy) throws InterruptedException, Exception {
 		super("Touch Sensor Window");
@@ -32,10 +34,7 @@ public class SwingArmControl extends JFrame{
 	}
 	
 	private void init(Bioloid Lucy) throws InterruptedException, Exception { 
-		JProgressBar M0 = new JProgressBar();
-		JProgressBar M1 = new JProgressBar();
-		JProgressBar M2 = new JProgressBar();
-		
+	
 		Lucy.move(2,204);
 		Lucy.move(4,818);
 		Lucy.move(6,512);
@@ -44,63 +43,101 @@ public class SwingArmControl extends JFrame{
 		angles[1] = 818;
 		angles[2] = 512;
 		
-		M0.setValue(100*(angles[0]/1023));
-		M0.setString("M0 : "+ angles[0]);
+		JProgressBar M[] = new JProgressBar[3];
 		
-		M1.setValue(100*(angles[1]/1023));
-		M1.setString("M1 : "+ angles[1]);
+		for(int index = 0; index<M.length;index++) {
+			M[index] = new JProgressBar();
+			M[index].setValue(100*(angles[index]/1023));
+			M[index].setStringPainted(true);
+			M[index].setString("M0 : "+ angles[0]);
+			M[index].setSize(new Dimension(100,50));
+		}
 		
-		M2.setValue(100*(angles[2]/1023));
-		M2.setString("M2 : "+ angles[2]);
+		JButton B[] = new JButton[10];
 		
-		JButton b1 = new JButton(">");
-		JButton b2 = new JButton("<");
-		JButton b3 = new JButton(">");
-		JButton b4 = new JButton("<");
-		JButton b5 = new JButton(">");	
-		JButton b6 = new JButton("<");
-		JButton b7 = new JButton("Done");
+		B[0] = new JButton(">");
+		B[1] = new JButton("<");
+		B[2] = new JButton(">");
+		B[3] = new JButton("<");
+		B[4] = new JButton(">");	
+		B[5] = new JButton("<");
+		B[6] = new JButton("Done");
+		B[7] = new JButton("100");
+		B[8] = new JButton("10");
+		B[9] = new JButton("1");
 		
-		JPanel window = new JPanel();
+		JLabel T[] = new JLabel[2];
+		for(int i=0;i<T.length;i++) {
+    		T[i] = new JLabel();
+    		T[i].setFont(new Font ("Arial", Font.BOLD,20));
+    	}
+		
+		T[0].setText("Defining pHome for Lucy Arm");
+		T[1].setText("Increment:");
+		
+		JFrame window = add(M,B,T);
+		
+		actionListeners(Lucy,B, window);		
+	}
+	
+	private JFrame add(JProgressBar M[], JButton B[], JLabel T[]) {
+		JFrame window = new JFrame();
 
 		window.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
+		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 0, 2, 50);
 		
+		gbc.gridwidth = 5;
+		window.add(T[0],gbc);
+		gbc.gridx+=3;
+		window.add(T[1],gbc);
+		
 		gbc.gridwidth = 1;
-		window.add(b2,gbc);
+		window.add(B[1],gbc);
 		gbc.gridx++;
-		window.add(M0,gbc);
+		window.add(M[0],gbc);
 		gbc.gridx++;
-		window.add(b1,gbc);
+		window.add(B[0],gbc);
+		gbc.gridx+=2;
+		window.add(B[7],gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy++;
-		window.add(b4,gbc);
+		window.add(B[3],gbc);
 		gbc.gridx++;
-		window.add(M1,gbc);
+		window.add(M[1],gbc);
 		gbc.gridx++;
-		window.add(b3,gbc);
+		window.add(B[2],gbc);
+		gbc.gridx+=2;
+		window.add(B[8],gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy++;
-		window.add(b6,gbc);
+		window.add(B[5],gbc);
 		gbc.gridx++;
-		window.add(M2,gbc);
+		window.add(M[2],gbc);
 		gbc.gridx++;
-		window.add(b5,gbc);
+		window.add(B[4],gbc);
+		gbc.gridx+=2;
+		window.add(B[9],gbc);
 				
 		gbc.gridx = 0;
 		gbc.gridy++;
-		window.add(b7,gbc);		
+		window.add(B[6],gbc);		
 		add(window);
 		
-		b1.addActionListener(new ActionListener() {
+		return window;
+	}
+	
+	private void actionListeners(Bioloid Lucy, JButton[] B, JFrame window) {
+		B[0].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(2,++angles[0]);
+	            	angles[0] = angles[0] + increment;
+					Lucy.move(2,angles[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -108,10 +145,11 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 		
-		b2.addActionListener(new ActionListener() {
+		B[1].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(2,--angles[0]);
+	            	angles[0] = angles[0] - increment;
+					Lucy.move(2,angles[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -119,10 +157,11 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 		
-		b3.addActionListener(new ActionListener() {
+		B[2].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(4,++angles[1]);
+	            	angles[1] = angles[1] + increment;
+					Lucy.move(4,angles[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -130,10 +169,11 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 		
-		b4.addActionListener(new ActionListener() {
+		B[3].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(4,--angles[1]);
+	            	angles[1] = angles[1] - increment;
+					Lucy.move(4,angles[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -141,10 +181,11 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 		
-		b5.addActionListener(new ActionListener() {
+		B[4].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(6,++angles[2]);
+	            	angles[2] = angles[2] + increment;
+					Lucy.move(6,angles[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -152,10 +193,11 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 		
-		b6.addActionListener(new ActionListener() {
+		B[5].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
-					Lucy.move(6,--angles[2]);
+	            	angles[2] = angles[2] - increment;
+					Lucy.move(6,angles[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -163,12 +205,39 @@ public class SwingArmControl extends JFrame{
 	         }          
 	    });
 	    
-	    b7.addActionListener(new ActionListener() {
+		B[6].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            done = true;
+	            window.dispose();
 	         }          
 	    });
 		
+		B[7].addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	increment = 100;
+	        	B[7].setEnabled(false);
+	        	B[8].setEnabled(true);
+	        	B[9].setEnabled(true);
+	         }          
+	    });
+		
+		B[8].addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	increment = 10;
+	        	B[7].setEnabled(true);
+	        	B[8].setEnabled(false);
+	        	B[9].setEnabled(true);
+	         }          
+	    });
+		
+		B[9].addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	increment = 1;
+	        	B[7].setEnabled(true);
+	        	B[8].setEnabled(true);
+	        	B[9].setEnabled(false);
+	         }          
+	    });
 	}
 	
 	public int[] getAngles() {
