@@ -3,11 +3,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="libs/AX12-JavA/src"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="libs/AX12-JavA/lib/pi4j/pi4j-core.jar"/>
-	<classpathentry kind="lib" path="libs/AX12-JavA/lib/pi4j/pi4j-device.jar"/>
-	<classpathentry kind="lib" path="libs/AX12-JavA/lib/pi4j/pi4j-gpio-extension.jar"/>
 	<classpathentry kind="lib" path="libs/jFuzzyLogic.jar"/>
 	<classpathentry kind="lib" path="libs/jfxrt.jar"/>
 	<classpathentry kind="lib" path="libs/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="libs/AX12JavA.jar"/>
+	<classpathentry kind="lib" path="libs/pi4j/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="libs/pi4j/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="libs/pi4j/pi4j-gpio-extension.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,3 +1,4 @@
+package Swing;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import TouchSensor.FuzzyProperties;
+import TouchSensor.TouchSensorSerial;
 import javafx.scene.control.ProgressBar;
 
 public class SwingProgressBar extends JFrame{

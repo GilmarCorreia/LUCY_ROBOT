@@ -1,3 +1,4 @@
+package Bioloid;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.wiringpi.Serial;
@@ -816,6 +817,54 @@ public class Ax12 {
                 Thread.sleep(getMessageDirectionDelayMillis());
                 gpio.shutdown();
         }        
+        
+        public int getPosition (int id) throws InterruptedException, Exception {
+            
+        	int pos = -1;
+        	
+            messageDirection(TRANSMITTING);
+            Serial.serialFlush(serialPort);
+            
+            int checksum = (~(id + AX_POS_LENGTH + AX_READ_DATA + AX_PRESENT_POSITION_L + AX_INT_READ))&0xff;
+            
+            Serial.serialPutByte(serialPort, (byte) AX_START);      
+            Serial.serialPutByte(serialPort, (byte) AX_START);   
+            Serial.serialPutByte(serialPort, (byte) id); 
+            Serial.serialPutByte(serialPort, (byte) AX_POS_LENGTH);   
+            Serial.serialPutByte(serialPort, (byte) AX_READ_DATA);   
+            Serial.serialPutByte(serialPort, (byte) AX_PRESENT_POSITION_L);   
+            Serial.serialPutByte(serialPort, (byte) AX_INT_READ);
+            Serial.serialPutByte(serialPort, (byte) checksum);   
+            
+            Serial.serialFlush(serialPort);
+            messageDirection(RECEIVING);
+            
+            int reply[] = new int[8];
+            double initialTime = System.currentTimeMillis();
+            
+            int i;
+            
+            for(i = 0; (System.currentTimeMillis() - initialTime)<1000.0 && Serial.serialDataAvail(serialPort)>=0 && i<8; i++)
+              reply[i] = Serial.serialGetchar(serialPort);
+            
+
+            if(i == 8){
+              int position = reply[5] + 256*reply[6];
+              int checkSum = (~(reply[2] + reply[3] + reply[4] + reply[5] + reply[6]))&0xFF;
+              if(checkSum == reply[7])
+                pos = position;
+              else
+                throw new Exception("Message error");
+                
+            }
+            else
+              throw new Exception("Comunication Error");
+
+            Thread.sleep(getMessageDirectionDelayMillis());
+            gpio.shutdown();
+            
+            return pos;
+    }        
         
         public void readVoltage (int id) throws InterruptedException, Exception{
         

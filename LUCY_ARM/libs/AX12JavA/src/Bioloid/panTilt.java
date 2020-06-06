@@ -1,3 +1,6 @@
+
+package Bioloid;
+
 import java.io.IOException;
 
 import com.pi4j.wiringpi.Gpio;

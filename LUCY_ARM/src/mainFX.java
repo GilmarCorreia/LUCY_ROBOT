@@ -1,3 +1,6 @@
+import FX.AnimationProgressBar;
+import TouchSensor.FuzzyProperties;
+import TouchSensor.TouchSensorSerial;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
