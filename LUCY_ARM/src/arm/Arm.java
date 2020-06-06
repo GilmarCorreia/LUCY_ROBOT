@@ -68,7 +68,7 @@ public class Arm{
 	public void setHome() throws InterruptedException, Exception{
 		SwingArmControl sac = new SwingArmControl(Lucy);
 		
-		while(!sac.getDone());
+		while(!sac.dispose());
 		
 		int angles[] = sac.getAngles();
 		double orientation[][] = FK(angles[0],angles[1],angles[2]);  

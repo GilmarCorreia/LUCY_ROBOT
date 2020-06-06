@@ -21,13 +21,13 @@ import Bioloid.Bioloid;
 public class SwingArmControl extends JFrame{
 
 	private int angles[] = new int[3];
-	public boolean done = false;
-	public int increment = 0;
+	private boolean done = false;
+	private int increment = 0;
 	
 	public SwingArmControl(Bioloid Lucy) throws InterruptedException, Exception {
 		super("Touch Sensor Window");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(400,300));
+		setSize(new Dimension(600,300));
 		setLocationRelativeTo(null);
 		init(Lucy);
 		setVisible(true);
@@ -49,7 +49,7 @@ public class SwingArmControl extends JFrame{
 			M[index] = new JProgressBar();
 			M[index].setValue(100*(angles[index]/1023));
 			M[index].setStringPainted(true);
-			M[index].setString("M0 : "+ angles[0]);
+			M[index].setString("M"+index+" : "+ angles[index]);
 			M[index].setSize(new Dimension(100,50));
 		}
 		
@@ -77,7 +77,7 @@ public class SwingArmControl extends JFrame{
 		
 		add(M,B,T);
 		
-		actionListeners(Lucy,B);		
+		actionListeners(Lucy,M,B);		
 	}
 	
 	private void add(JProgressBar M[], JButton B[], JLabel T[]) {
@@ -94,7 +94,9 @@ public class SwingArmControl extends JFrame{
 		window.add(T[0],gbc);
 		gbc.gridx+=3;
 		window.add(T[1],gbc);
+		gbc.gridy++;
 		
+		gbc.gridx = 0;
 		gbc.gridwidth = 1;
 		window.add(B[1],gbc);
 		gbc.gridx++;
@@ -131,12 +133,14 @@ public class SwingArmControl extends JFrame{
 		
 	}
 	
-	private void actionListeners(Bioloid Lucy, JButton[] B) {
+	private void actionListeners(Bioloid Lucy, JProgressBar[] M, JButton[] B) {
 		B[0].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
 	            	angles[0] = angles[0] + increment;
 					Lucy.move(2,angles[0]);
+					M[0].setValue(100*(angles[0]/1023));
+					M[0].setString("M0 : "+ angles[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -149,6 +153,8 @@ public class SwingArmControl extends JFrame{
 	            try {
 	            	angles[0] = angles[0] - increment;
 					Lucy.move(2,angles[0]);
+					M[0].setValue(100*(angles[0]/1023));
+					M[0].setString("M0 : "+ angles[0]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -161,6 +167,8 @@ public class SwingArmControl extends JFrame{
 	            try {
 	            	angles[1] = angles[1] + increment;
 					Lucy.move(4,angles[1]);
+					M[1].setValue(100*(angles[1]/1023));
+					M[1].setString("M1 : "+ angles[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -173,6 +181,8 @@ public class SwingArmControl extends JFrame{
 	            try {
 	            	angles[1] = angles[1] - increment;
 					Lucy.move(4,angles[1]);
+					M[1].setValue(100*(angles[1]/1023));
+					M[1].setString("M1 : "+ angles[1]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -185,6 +195,8 @@ public class SwingArmControl extends JFrame{
 	            try {
 	            	angles[2] = angles[2] + increment;
 					Lucy.move(6,angles[2]);
+					M[2].setValue(100*(angles[2]/1023));
+					M[2].setString("M2 : "+ angles[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -197,6 +209,8 @@ public class SwingArmControl extends JFrame{
 	            try {
 	            	angles[2] = angles[2] - increment;
 					Lucy.move(6,angles[2]);
+					M[2].setValue(100*(angles[2]/1023));
+					M[2].setString("M2 : "+ angles[2]);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -207,6 +221,7 @@ public class SwingArmControl extends JFrame{
 		B[6].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            done = true;
+	            System.out.println(done);
 	            dispose();
 	         }          
 	    });
