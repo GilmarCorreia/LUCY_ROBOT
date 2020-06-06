@@ -68,10 +68,12 @@ public class Arm{
 	public void setHome() throws InterruptedException, Exception{
 		SwingArmControl sac = new SwingArmControl(Lucy);
 		
+		while(!sac.getDone());
+		
 		int angles[] = sac.getAngles();
 		double orientation[][] = FK(angles[0],angles[1],angles[2]);  
 		
-		pHome = new double[] {orientation[1][4],orientation[2][4],orientation[3][4]};
+		pHome = new double[] {orientation[0][3],orientation[1][3],orientation[2][3]};
 	}
 	
 	private double[][] matrixMultiplication(double[][] M1, double[][] M2) {

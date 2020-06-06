@@ -20,11 +20,12 @@ import Bioloid.Bioloid;
 public class SwingArmControl extends JFrame{
 
 	private int angles[] = new int[3];
+	public boolean done = false;
 	
 	public SwingArmControl(Bioloid Lucy) throws InterruptedException, Exception {
 		super("Touch Sensor Window");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(800,400));
+		setSize(new Dimension(400,300));
 		setLocationRelativeTo(null);
 		init(Lucy);
 		setVisible(true);
@@ -35,20 +36,22 @@ public class SwingArmControl extends JFrame{
 		JProgressBar M1 = new JProgressBar();
 		JProgressBar M2 = new JProgressBar();
 		
-		M0.setFont(new Font ("Arial", Font.BOLD,20));
-		M1.setFont(new Font ("Arial", Font.BOLD,20));
-		M2.setFont(new Font ("Arial", Font.BOLD,20));
+		Lucy.move(2,204);
+		Lucy.move(4,818);
+		Lucy.move(6,512);
 		
-		angles[0] = Lucy.getPosition(2);
-		Thread.sleep(2000);
-		angles[1] = Lucy.getPosition(4);
-		Thread.sleep(2000);
-		angles[2] = Lucy.getPosition(6);
-		Thread.sleep(2000);
+		angles[0] = 204;
+		angles[1] = 818;
+		angles[2] = 512;
 		
 		M0.setValue(100*(angles[0]/1023));
+		M0.setString("M0 : "+ angles[0]);
+		
 		M1.setValue(100*(angles[1]/1023));
+		M1.setString("M1 : "+ angles[1]);
+		
 		M2.setValue(100*(angles[2]/1023));
+		M2.setString("M2 : "+ angles[2]);
 		
 		JButton b1 = new JButton(">");
 		JButton b2 = new JButton("<");
@@ -56,6 +59,7 @@ public class SwingArmControl extends JFrame{
 		JButton b4 = new JButton("<");
 		JButton b5 = new JButton(">");	
 		JButton b6 = new JButton("<");
+		JButton b7 = new JButton("Done");
 		
 		JPanel window = new JPanel();
 
@@ -88,6 +92,9 @@ public class SwingArmControl extends JFrame{
 		gbc.gridx++;
 		window.add(b5,gbc);
 				
+		gbc.gridx = 0;
+		gbc.gridy++;
+		window.add(b7,gbc);		
 		add(window);
 		
 		b1.addActionListener(new ActionListener() {
@@ -155,10 +162,20 @@ public class SwingArmControl extends JFrame{
 				}
 	         }          
 	    });
+	    
+	    b7.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            done = true;
+	         }          
+	    });
 		
 	}
 	
 	public int[] getAngles() {
 		return angles;
+	}
+	
+	public boolean getDone(){
+		return this.done;
 	}
 }
