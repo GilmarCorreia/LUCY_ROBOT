@@ -131,7 +131,7 @@ public class SwingArmControl extends JFrame{
 		
 	}
 	
-	private void actionListeners(Bioloid Lucy, JButton[] B, JFrame window) {
+	private void actionListeners(Bioloid Lucy, JButton[] B) {
 		B[0].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            try {
@@ -207,7 +207,7 @@ public class SwingArmControl extends JFrame{
 		B[6].addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            done = true;
-	            this.dispose();
+	            dispose();
 	         }          
 	    });
 		
