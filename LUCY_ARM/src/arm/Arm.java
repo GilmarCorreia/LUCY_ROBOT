@@ -12,7 +12,7 @@ public class Arm{
 	private double L3 = 10.650;    // centimeters
 	private double a1 = 1.320;     // centimeters
 	
-	private double pHome[] = new double[3]; 
+	private double pHome[][] = new double[2][3]; 
 	
 	public Arm () throws InterruptedException, Exception{
 		this.Lucy = new Bioloid(6);
@@ -91,9 +91,10 @@ public class Arm{
 		double angles[] = decToAngles(sac.getDec());
 		double orientation[][] = FK(angles[0],angles[1],angles[2]);  
 		
-		pHome = new double[] {orientation[0][3],orientation[1][3],orientation[2][3]};
+		pHome[0] = new double[] {orientation[0][3],orientation[1][3],orientation[2][3]};
+		pHome[1] = new double[] {sac.getDec()[0],sac.getDec()[1],sac.getDec()[2]};
 		
-		System.out.printf("pHome = (%.2f, %.2f, %.2f)\n", pHome[0], pHome[1], pHome[2]);
+		System.out.printf("pHome = (%.2f, %.2f, %.2f)\n", pHome[0][0], pHome[0][1], pHome[0][2]);
 		
 		//double[] teste = IK(pHome[0], pHome[1], pHome[2]);
 	}
