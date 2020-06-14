@@ -7,6 +7,7 @@ public class FuzzyProperties {
 	private String fileName = "fcl/Hertenstein.fcl";
 	private String fileName2 = "fcl/Andreasson.fcl";
 	private String fileName3 = "fcl/Mix.fcl";
+	private String model;
 	
 	public FIS fis;
 	public FIS fis2;
@@ -43,12 +44,15 @@ public class FuzzyProperties {
 		if (model.equals(new String("Hertenstein"))){
 			this.fis = FIS.load(fileName, true);
 			fn = fileName;
+			setModel("Hertenstein");
 		} else if (model.equals(new String("Andreasson"))) {
 			this.fis = FIS.load(fileName2, true);
 			fn = fileName2;
+			setModel("Andreasson");
 		} else if (model.equals(new String("Mix"))) {
 			this.fis = FIS.load(fileName3, true);
 			fn = fileName3;
+			setModel("Mix");
 		}
 		
 		if (fis == null){ 
@@ -108,5 +112,13 @@ public class FuzzyProperties {
     		emotion = functionBlock.getVariable("simpatia").getValue();
     	
     	return emotion;
+    }
+    
+    private void setModel(String model) {
+    	this.model = model;
+    }
+    
+    public String getModel() {
+    	return this.model;
     }
 }

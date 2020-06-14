@@ -2,6 +2,7 @@ package arm;
 
 import Bioloid.Bioloid;
 import Swing.SwingArmControl;
+import Swing.SwingController;
 import TouchSensor.FuzzyProperties;
 import TouchSensor.TouchSensorSerial;
 
@@ -131,33 +132,15 @@ public class Arm{
 		}
 	}
 	
+	public Bioloid getBioloid() {
+		return this.Lucy;
+	}
+	
+	public double[][] getPHome() {
+		return this.pHome;
+	}
+	
 	public void activate(String emotion) {
-		
-		new SwingController(TS8, fuzzyCl);
-		
-		int force = TS8.getForce();
-    	double initialTime = TS8.getMillisInitialTime();
-    	double currentTime = System.currentTimeMillis();
-    	double deltaT = currentTime-initialTime;
-    	
-    	double value = fuzzyCl.fuzzyClassifier(fuzzyCl.fis, emotion,force,deltaT/1000.0);
-    	
-    	value = (int)((Math.abs(value)/50.0)*100.0);
-    	
-    	System.out.println("Simpatia: "+value);
-    	
-    	double ref = 70.0;
-    	
-    	double error = ref-value;
-    	
-    	double kp = 0.1;
-    	double controller = kp*error;
-    	
-    	try {
-			Lucy.move(6, (int)(controller+pHome[1][2]));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		new SwingController(fuzzyCl, TS8, this, emotion);
 	}
 }
