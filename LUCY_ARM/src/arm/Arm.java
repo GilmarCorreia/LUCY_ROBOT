@@ -16,8 +16,8 @@ public class Arm{
 	
 	private double pHome[][] = new double[2][3]; 
 	
-	private TouchSensorSerial TS8 = new TouchSensorSerial();
-	private FuzzyProperties fuzzyCl = new FuzzyProperties();
+	private TouchSensorSerial TS8;
+	private FuzzyProperties fuzzyCl;
 	
 	public Arm () throws InterruptedException, Exception{
 		this.Lucy = new Bioloid(6);
@@ -132,6 +132,9 @@ public class Arm{
 	}
 	
 	public void activate(String emotion) {
+		
+		new SwingController(TS8, fuzzyCl);
+		
 		int force = TS8.getForce();
     	double initialTime = TS8.getMillisInitialTime();
     	double currentTime = System.currentTimeMillis();
@@ -140,6 +143,8 @@ public class Arm{
     	double value = fuzzyCl.fuzzyClassifier(fuzzyCl.fis, emotion,force,deltaT/1000.0);
     	
     	value = (int)((Math.abs(value)/50.0)*100.0);
+    	
+    	System.out.println("Simpatia: "+value);
     	
     	double ref = 70.0;
     	

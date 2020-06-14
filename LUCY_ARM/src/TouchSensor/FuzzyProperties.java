@@ -100,7 +100,7 @@ public class FuzzyProperties {
     		emotion = functionBlock.getVariable("tristeza").getValue();
     	else if(Emotion.equals(new String("Amor")))
     		emotion = functionBlock.getVariable("amor").getValue();
-    	else if(Emotion.equals(new String("Gratidão")))
+    	else if(Emotion.equals(new String("Gratidao")))
     		emotion = functionBlock.getVariable("gratidao").getValue();
     	else if(Emotion.equals(new String("Felicidade")))
     		emotion = functionBlock.getVariable("felicidade").getValue();
