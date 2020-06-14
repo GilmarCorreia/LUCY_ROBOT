@@ -149,7 +149,7 @@ public class SwingController extends JFrame{
 		return window;
 	}
 	
-	//public void paint(Graphics g){
-	 //   g.drawRect(100,100,100,100);
-	//}
+	public void paint(Graphics g){
+	    g.drawRect(100,100,100,100);
+	}
 }
