@@ -70,24 +70,25 @@ public class SwingController extends JFrame{
 				double currentTime = System.currentTimeMillis();
 				double deltaT = currentTime-initialTime;
 	            	
-				double values[] = fuzzyCl.fuzzyClassifier(fuzzyCl.fis,force,deltaT/1000.0);
+				double value = fuzzyCl.fuzzyClassifier(fuzzyCl.fis,emotion,force,deltaT/1000.0);
 				
-				double value = (double)((Math.abs(values[7])/50.0)*100.0);
+				value = (double)((Math.abs(value)/50.0)*100.0);
 				
-				System.out.println(value);
+				//System.out.println(value);
 				double ref = 70.0;
 				
 				double error = ref-value;
 				
-				double kp = 0.5;
+				double kp = 0.01;
 				double controller = kp*error;
 				
 				try {
-						arm.getBioloid().move(6, (int)(controller+arm.getPHome()[1][2]));
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					arm.setPHome(1,1,arm.getPHome()[1][1]+controller);
+					arm.getBioloid().move(4, (int)(arm.getPHome()[1][1]));
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			
 				/*for(int i =0;i<3;i++) {
 					for(int j = 0;j<8;j++) {
@@ -105,6 +106,7 @@ public class SwingController extends JFrame{
 						}
 					}
 				}*/
+				texts[8].setText("Fuzzy " +emotion + " = " + value);
 				texts[6].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%");
 				texts[7].setText("Tempo = " + Math.round(deltaT) + "ms");
 				
@@ -144,12 +146,23 @@ public class SwingController extends JFrame{
 		gbc.gridx++;
 		// ARROW
 		window.add(texts[3],gbc); // kp*error
+		gbc.gridx++;
+		// BLOCK
+		gbc.gridx++;
+		// ARROW
+		gbc.gridx++;
+		// Motors
+		
+		gbc.gridy++;
+		gbc.gridx = 0;
+		gbc.gridx+=3;
+		window.add(texts[8],gbc); // emotion
 		
 		add(window);
 		return window;
 	}
 	
-	public void paint(Graphics g){
-	    g.drawRect(100,100,100,100);
-	}
+	//public void paint(Graphics g){
+	//    g.drawRect(100,100,100,100);
+	//}
 }

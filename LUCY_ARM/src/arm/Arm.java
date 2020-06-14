@@ -131,6 +131,10 @@ public class Arm{
 		return this.Lucy;
 	}
 	
+	public void setPHome(int row, int col, double value) {
+		this.pHome[row][col] = value;
+	}
+	
 	public double[][] getPHome() {
 		return this.pHome;
 	}
