@@ -33,39 +33,23 @@ public class SwingController2 extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{114,114,114,114,114,114,114};
-		gbl_contentPane.rowHeights = new int[]{50,50,50,50,50,50,50};
-		gbl_contentPane.columnWeights = new double[]{0.0};
-		gbl_contentPane.rowWeights = new double[]{0.0};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Modelo: " + fuzzyCl.getModel());
+		lblNewLabel.setBounds(0, 60, 300, 20);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 16));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 7;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Emocao Analisada: " + emotion);
+		lblNewLabel_1.setBounds(256, 163, 269, 20);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 16));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.gridwidth = 7;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 1;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		contentPane.add(lblNewLabel_1);
 		
 		JProgressBar progressBar = new JProgressBar();
-		GridBagConstraints gbc_progressBar = new GridBagConstraints();
-		gbc_progressBar.insets = new Insets(0, 0, 5, 5);
-		gbc_progressBar.gridx = 0;
-		gbc_progressBar.gridy = 2;
-		contentPane.add(progressBar, gbc_progressBar);
+		progressBar.setBounds(41, 216, 10, 14);
+		contentPane.add(progressBar);
 		setLocationRelativeTo(null);
 		//init(fuzzyCl, ts, arm, emotion);
 		setVisible(true);
