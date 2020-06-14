@@ -2,6 +2,8 @@ package arm;
 
 import Bioloid.Bioloid;
 import Swing.SwingArmControl;
+import TouchSensor.FuzzyProperties;
+import TouchSensor.TouchSensorSerial;
 
 public class Arm{
 	
@@ -14,9 +16,14 @@ public class Arm{
 	
 	private double pHome[][] = new double[2][3]; 
 	
+	private TouchSensorSerial TS8 = new TouchSensorSerial();
+	private FuzzyProperties fuzzyCl = new FuzzyProperties();
+	
 	public Arm () throws InterruptedException, Exception{
 		this.Lucy = new Bioloid(6);
 		setHome();
+		this.TS8 = new TouchSensorSerial();
+		this.fuzzyCl = new FuzzyProperties("Hertenstein");
 	}
 	
 	private double[][] FK(double theta1, double theta2, double theta3){
@@ -121,6 +128,31 @@ public class Arm{
 			for(int j = 0;j<M[0].length;j++)
 				System.out.printf("%.2f , ",M[i][j]);
 			System.out.println("");
+		}
+	}
+	
+	public void activate(String emotion) {
+		int force = TS8.getForce();
+    	double initialTime = TS8.getMillisInitialTime();
+    	double currentTime = System.currentTimeMillis();
+    	double deltaT = currentTime-initialTime;
+    	
+    	double value = fuzzyCl.fuzzyClassifier(fuzzyCl.fis, emotion,force,deltaT/1000.0);
+    	
+    	value = (int)((Math.abs(value)/50.0)*100.0);
+    	
+    	double ref = 70.0;
+    	
+    	double error = ref-value;
+    	
+    	double kp = 0.1;
+    	double controller = kp*error;
+    	
+    	try {
+			Lucy.move(6, (int)(controller+pHome[1][2]));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
