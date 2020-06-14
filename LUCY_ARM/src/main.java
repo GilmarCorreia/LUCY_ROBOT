@@ -1,5 +1,8 @@
 
 import arm.Arm;
+import Swing.SwingController;
+import TouchSensor.FuzzyProperties;
+import TouchSensor.TouchSensorSerial;
 
 /**
  * 
@@ -11,8 +14,12 @@ import arm.Arm;
 public class main{
 	public static void main(String[] args) throws InterruptedException, Exception {
 		
+		TouchSensorSerial TS8 = new TouchSensorSerial();
+		FuzzyProperties fuzzyCl = new FuzzyProperties("Hertenstein");
+		Thread.sleep(2000);
+		
 		Arm Lucy = new Arm();
-		Lucy.activate("Simpatia");
-		//new SwingProgressBar(fuzzyCl,TS8);
+	
+		new SwingController(fuzzyCl,TS8,Lucy,"Simpatia");
 	}
 }

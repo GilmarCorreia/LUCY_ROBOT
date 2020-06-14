@@ -28,86 +28,87 @@ public class SwingController extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(new Dimension(800,400));
 		setLocationRelativeTo(null);
-		init(fuzzyCl, ts, arm, emotion);
+		init(fuzzyCl,ts,arm,emotion);
 		setVisible(true);
 	}
 
 	private void init(FuzzyProperties fuzzyCl, TouchSensorSerial ts, Arm arm, String emotion) {
 		JLabel []texts = new JLabel[9];
-    	for(int i=0;i<texts.length;i++) {
-    		texts[i] = new JLabel();
-    		texts[i].setFont(new Font ("Arial", Font.BOLD,20));
-    	}
+		for(int i=0;i<texts.length;i++) {
+			texts[i] = new JLabel();
+			texts[i].setFont(new Font ("Arial", Font.BOLD,20));
+		}
 
-        texts[0].setText("Modelo: " + fuzzyCl.getModel());
-        texts[1].setText("Emoção Analisada: " + emotion);
- 
-        texts[2].setText("RefSig: ");
-        texts[3].setText("Error: ");
-        texts[4].setText("Kp*Error: ");
-        texts[5].setText("M3: ");
-        texts[6].setText("Força: ");
-        texts[7].setText("Tempo: ");
-        texts[8].setText("Fuzzy: ");
-        
-        // create a progressbar 
-        JProgressBar []pb = new JProgressBar[3];
-        
-        for(int i = 0;i<pb.length;i++) {
-        	pb[i] = new JProgressBar();
-        	pb[i].setStringPainted(true);
-        	pb[i].setValue(0);
-        	pb[i].setSize(new Dimension(100,50));
-        }
+		texts[0].setText("Modelo: " + fuzzyCl.getModel());
+		texts[1].setText("Emocao Analisada: " + emotion);
+	 
+		texts[2].setText("RefSig: ");
+		texts[3].setText("Error: ");
+		texts[4].setText("Kp*Error: ");
+		texts[5].setText("M3: ");
+		texts[6].setText("Forca: ");
+		texts[7].setText("Tempo: ");
+		texts[8].setText("Fuzzy: ");
 		
+		// create a progressbar 
+		JProgressBar []pb = new JProgressBar[3];
+		
+		for(int i = 0;i<pb.length;i++) {
+			pb[i] = new JProgressBar();
+			pb[i].setStringPainted(true);
+			pb[i].setValue(0);
+			pb[i].setSize(new Dimension(100,50));
+		}
+			
 		
 		JPanel window = add(texts,pb);
 		
 		clock = new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int force = ts.getForce();
-		    	double initialTime = ts.getMillisInitialTime();
-		    	double currentTime = System.currentTimeMillis();
-		    	double deltaT = currentTime-initialTime;
-		    	
-		    	double value = fuzzyCl.fuzzyClassifier(fuzzyCl.fis, emotion,force,deltaT/1000.0);
-		    	
-		    	value = (int)((Math.abs(value)/50.0)*100.0);
-		    	
-		    	double ref = 70.0;
-		    	
-		    	double error = ref-value;
-		    	
-		    	double kp = 0.1;
-		    	double controller = kp*error;
-		    	
-		    	try {
-					arm.getBioloid().move(6, (int)(controller+arm.getPHome()[1][2]));
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            	
-            	/*for(int i =0;i<3;i++) {
-            		for(int j = 0;j<8;j++) {
-            			if(i == 0) {
-            				pb[j+(8*i)].setValue((int)((Math.abs(values[j])/50.0)*100.0));
-            				pb[j+(8*i)].setString((int)((Math.abs(values[j])/50.0)*100.0) + "%");
-            			}
-            			else if(i == 1) {
-            				pb[j+(8*i)].setValue((int)((Math.abs(values2[j])/50.0)*100.0));
-            				pb[j+(8*i)].setString((int)((Math.abs(values2[j])/50.0)*100.0) + "%");
-            			}
-            			else if(i == 2) {
-            				pb[j+(8*i)].setValue((int)((Math.abs(values3[j])/50.0)*100.0));
-            				pb[j+(8*i)].setString((int)((Math.abs(values3[j])/50.0)*100.0) + "%");
-            			}
-            		}
-            	}*/
-            	texts[6].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%");
-            	texts[7].setText("Tempo = " + Math.round(deltaT) + "ms");
-            	
-            	//System.out.println("Entrei");
+				double initialTime = ts.getMillisInitialTime();
+				double currentTime = System.currentTimeMillis();
+				double deltaT = currentTime-initialTime;
+	            	
+				double values[] = fuzzyCl.fuzzyClassifier(fuzzyCl.fis,force,deltaT/1000.0);
+				
+				double value = (double)((Math.abs(values[7])/50.0)*100.0);
+				
+				System.out.println(value);
+				double ref = 70.0;
+				
+				double error = ref-value;
+				
+				double kp = 0.5;
+				double controller = kp*error;
+				
+				try {
+						arm.getBioloid().move(6, (int)(controller+arm.getPHome()[1][2]));
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			
+				/*for(int i =0;i<3;i++) {
+					for(int j = 0;j<8;j++) {
+						if(i == 0) {
+							pb[j+(8*i)].setValue((int)((Math.abs(values[j])/50.0)*100.0));
+							pb[j+(8*i)].setString((int)((Math.abs(values[j])/50.0)*100.0) + "%");
+						}
+						else if(i == 1) {
+							pb[j+(8*i)].setValue((int)((Math.abs(values2[j])/50.0)*100.0));
+							pb[j+(8*i)].setString((int)((Math.abs(values2[j])/50.0)*100.0) + "%");
+						}
+						else if(i == 2) {
+							pb[j+(8*i)].setValue((int)((Math.abs(values3[j])/50.0)*100.0));
+							pb[j+(8*i)].setString((int)((Math.abs(values3[j])/50.0)*100.0) + "%");
+						}
+					}
+				}*/
+				texts[6].setText("Forca = " + Math.round((force/1023.0)*100.0)+"%");
+				texts[7].setText("Tempo = " + Math.round(deltaT) + "ms");
+				
+				//System.out.println("Entrei");
 			}
 		});
 		
@@ -148,7 +149,7 @@ public class SwingController extends JFrame{
 		return window;
 	}
 	
-	public void paint(Graphics g){
-	    g.drawRect(100,100,100,100);
-	}
+	//public void paint(Graphics g){
+	 //   g.drawRect(100,100,100,100);
+	//}
 }

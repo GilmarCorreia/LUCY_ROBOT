@@ -50,7 +50,7 @@ public class SwingController2 extends JFrame {
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Emoção Analisada: " + emotion);
+		JLabel lblNewLabel_1 = new JLabel("Emocao Analisada: " + emotion);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 16));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();

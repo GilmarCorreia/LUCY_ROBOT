@@ -17,14 +17,9 @@ public class Arm{
 	
 	private double pHome[][] = new double[2][3]; 
 	
-	private TouchSensorSerial TS8;
-	private FuzzyProperties fuzzyCl;
-	
 	public Arm () throws InterruptedException, Exception{
 		this.Lucy = new Bioloid(6);
 		setHome();
-		this.TS8 = new TouchSensorSerial();
-		this.fuzzyCl = new FuzzyProperties("Hertenstein");
 	}
 	
 	private double[][] FK(double theta1, double theta2, double theta3){
@@ -138,9 +133,5 @@ public class Arm{
 	
 	public double[][] getPHome() {
 		return this.pHome;
-	}
-	
-	public void activate(String emotion) {
-		new SwingController(fuzzyCl, TS8, this, emotion);
 	}
 }
