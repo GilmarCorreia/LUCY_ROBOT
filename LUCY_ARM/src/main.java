@@ -14,11 +14,11 @@ import TouchSensor.TouchSensorSerial;
 public class main{
 	public static void main(String[] args) throws InterruptedException, Exception {
 		
-		//Arm Lucy = new Arm();
+		Arm Lucy = new Arm();
 		
-		//TouchSensorSerial TS8 = new TouchSensorSerial();
-		//FuzzyProperties fuzzyCl = new FuzzyProperties("Hertenstein");
+		TouchSensorSerial TS8 = new TouchSensorSerial();
+		FuzzyProperties fuzzyCl = new FuzzyProperties("Hertenstein");
 	
-		new SwingController();//fuzzyCl,TS8,Lucy,"Raiva");
+		new SwingController(fuzzyCl,TS8,Lucy,"Raiva");
 	}
 }
