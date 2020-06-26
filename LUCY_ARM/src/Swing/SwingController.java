@@ -113,7 +113,7 @@ public class SwingController extends JFrame{
 		window.add(pb[2]);
 		
 		texts[7].setText("Tempo: ");
-		texts[7].setBounds(228+60, 505-120, (int)(texts[7].getPreferredSize().getWidth()), (int)(texts[7].getPreferredSize().getHeight()));
+		texts[7].setBounds(228+60, 505-120, 400, (int)(texts[7].getPreferredSize().getHeight()));
 		window.add(texts[7]);
 		
 		texts[8].setText(emotion+ ": ");
@@ -148,7 +148,6 @@ public class SwingController extends JFrame{
 					arm.setPHome(1,1,arm.getPHome()[1][1]+controller);
 					arm.getBioloid().move(4, (int)(arm.getPHome()[1][1]));
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				pb[0].setValue((int) ref);
@@ -157,30 +156,16 @@ public class SwingController extends JFrame{
 				pb[1].setValue((int) ((arm.getPHome()[1][1]/1023.0)*100.0));
 				pb[1].setString(Math.round((arm.getPHome()[1][1]/1023.0)*100.0) + "%");
 				
-				/*for(int i =0;i<3;i++) {
-					for(int j = 0;j<8;j++) {
-						if(i == 0) {
-							pb[j+(8*i)].setValue((int)((Math.abs(values[j])/50.0)*100.0));
-							pb[j+(8*i)].setString((int)((Math.abs(values[j])/50.0)*100.0) + "%");
-						}
-						else if(i == 1) {
-							pb[j+(8*i)].setValue((int)((Math.abs(values2[j])/50.0)*100.0));
-							pb[j+(8*i)].setString((int)((Math.abs(values2[j])/50.0)*100.0) + "%");
-						}
-						else if(i == 2) {
-							pb[j+(8*i)].setValue((int)((Math.abs(values3[j])/50.0)*100.0));
-							pb[j+(8*i)].setString((int)((Math.abs(values3[j])/50.0)*100.0) + "%");
-						}
-					}
-				}*/
-				pb[3].setValue((int) value);
-				pb[3].setString(Math.round(value) + "%");
-				
 				pb[2].setValue((int) ((force/1023.0)*100.0));
 				pb[2].setString(Math.round((force/1023.0)*100.0) + "%");
 				
-				texts[3].setText("Error: " + Math.round(error));
-				texts[4].setText("Kp*Error: " + Math.round(controller));
+				pb[3].setValue((int) value);
+				pb[3].setString(Math.round(value) + "%");
+				
+				//texts[3].setText("Error: " + Math.round(error));
+				//texts[3].setBounds(300, 150, (int)(texts[3].getPreferredSize().getWidth()), 30);
+				//texts[4].setText("Kp*Error: " + Math.round(controller));
+				//texts[4].setBounds(430, 125, (int)(texts[4].getPreferredSize().getWidth()), 30);
 			    texts[7].setText("Tempo: " + Math.round(deltaT) + "ms");
 				
 				//System.out.println("Entrei");
@@ -200,15 +185,15 @@ public class SwingController extends JFrame{
 		SwingArrow arrow1 = new SwingArrow(n,180,210,50,4,0);
 		SwingSumBlock sumBlock = new SwingSumBlock(n,arrow1.getX()+20+50+30,arrow1.getY()+2,50);
 		SwingArrow arrow2 = new SwingArrow(n,sumBlock.getX()+30,arrow1.getY(),100,4,0);
-		SwingBlock block1 = new SwingBlock(n,arrow2.getX()+130,arrow1.getY(),100,50, "Controller");
+		SwingBlock block1 = new SwingBlock(n,arrow2.getX()+130,arrow1.getY(),100,50, "Controller   ");
 		SwingArrow arrow3 = new SwingArrow(n,block1.getX()+110,arrow1.getY(),100,4,0);
-		SwingBlock block3 = new SwingBlock(n,arrow3.getX()+130,arrow1.getY(),90,50, "  Motors  ");
+		SwingBlock block3 = new SwingBlock(n,arrow3.getX()+130,arrow1.getY(),90,50, " Motors    ");
 		SwingArrow arrow4 = new SwingArrow(n,block3.getX()+block3.getWidth()+10,arrow1.getY(),75,4,0);
 	    n.fillRect(block3.getX()+block3.getWidth()+30, arrow1.getY(), 4, 275);
 	    SwingArrow arrow5 = new SwingArrow(n,sumBlock.getX()+75,arrow1.getY()+(block3.getHeight()/2)+250,block3.getX()+block3.getWidth()+30-sumBlock.getX()+4-75,4,1);
-	    SwingBlock block4 = new SwingBlock(n,sumBlock.getX()-45,arrow5.getY(),90,50, "    PET   ");
+	    SwingBlock block4 = new SwingBlock(n,sumBlock.getX()-45,arrow5.getY(),90,50, "   PET   ");
 	    SwingArrow arrow6 = new SwingArrow(n,block4.getX()+(block4.getWidth()/2),block4.getY()-(block4.getHeight()/2)-50-10,4,50,2);
-	    SwingBlock block5 = new SwingBlock(n,block4.getX(),arrow6.getY()-45-10,90,50, "    UPT   ");
+	    SwingBlock block5 = new SwingBlock(n,block4.getX(),arrow6.getY()-45-10,90,50, "   UPT   ");
 	    SwingArrow arrow7 = new SwingArrow(n,block5.getX()+(block5.getWidth()/2),block5.getY()-(block5.getHeight()/2)-40-10,4,40,2);
 	}
 }

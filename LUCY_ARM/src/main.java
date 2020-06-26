@@ -19,6 +19,6 @@ public class main{
 		TouchSensorSerial TS8 = new TouchSensorSerial();
 		FuzzyProperties fuzzyCl = new FuzzyProperties("Hertenstein");
 	
-		new SwingController(fuzzyCl,TS8,Lucy,"Raiva");
+		new SwingController(fuzzyCl,TS8,Lucy,"Simpatia");
 	}
 }
